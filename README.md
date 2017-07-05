@@ -117,4 +117,4 @@ namespace JCTools.I18N.Test.ViewModels
 For view spanish usage process, visit: [JCTools.mx](http://jctools.mx/show/localizacion-y-globalizacion-en-net-core)
 
 ## License
-[MIT License](/blob/master/LICENSE)
+[MIT License](/LICENSE)
