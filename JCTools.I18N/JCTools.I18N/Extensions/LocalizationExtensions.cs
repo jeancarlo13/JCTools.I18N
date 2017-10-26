@@ -13,6 +13,7 @@ using JCTools.I18N.Services;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Localization;
+using Microsoft.Extensions.Logging;
 
 namespace JCTools.I18N.Extensions
 {
@@ -83,7 +84,8 @@ namespace JCTools.I18N.Extensions
         /// <param name="services">The application services collection</param>
         /// <param name="enviroment">The enviroment of the application</param>
         /// <returns>The modified application services collection</returns>
-        public static IServiceCollection AddSingleLocalizationFile<TClass, TResource>(this IServiceCollection services, IHostingEnvironment enviroment)
+        public static IServiceCollection AddSingleLocalizationFile<TClass, TResource>(
+            this IServiceCollection services, IHostingEnvironment enviroment)
         {
             if (!_isAddedServices)
                 throw new InvalidOperationException($"You should use the {nameof(AddLocalizationServices)} method first.");
@@ -102,7 +104,13 @@ namespace JCTools.I18N.Extensions
             services.TryAddTransient(p =>
             {
                 var localizationOptions = p.GetService<IOptions<LocalizationOptions>>();
+#if NETCOREAPP1_1
                 var manager = new ResourceManagerStringLocalizerFactory(enviroment, localizationOptions);
+#elif NETCOREAPP2_0
+                var provider = services.BuildServiceProvider();
+                var loggerFactory = provider.GetService<ILoggerFactory>();
+                var manager = new ResourceManagerStringLocalizerFactory(localizationOptions, loggerFactory);
+#endif
                 var htmlLocalizer = new HtmlLocalizerFactory(manager).Create(tClassType);
                 return new SingleHtmlLocalizer(htmlLocalizer);
             });

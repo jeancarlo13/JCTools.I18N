@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFrameworks>netcoreapp1.1;netcoreapp2.0</TargetFrameworks>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <Version>1.0.0.5</Version>
+    <Version>2.0.0.2</Version>
     <Authors>JeanCarlo13</Authors>
     <Company>JCTools</Company>
     <Description>A simplification of the configuration of location in .net core</Description>
@@ -17,7 +17,7 @@
     <Win32Resource />
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp1.1'">
     <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Localization" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Localization.Routing" Version="1.1.2" />
@@ -27,6 +27,18 @@
     <PackageReference Include="Microsoft.Extensions.Localization" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="1.1.2" />
+    <PackageReference Include="System.Globalization" Version="4.3.0" />
+  </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Localization.Routing" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="2.0.0" />
     <PackageReference Include="System.Globalization" Version="4.3.0" />
   </ItemGroup>
 
