@@ -1,5 +1,9 @@
 # JCTools.I18N
 A simplification of the configuration of location in .net core
+## Compatibility
+* Net core 1.0
+* Net core 1.1
+* Net core 2.
 ## Installation
 ```sh
 PM> Install-Package JCTools.I18N
